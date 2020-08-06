@@ -11,5 +11,5 @@ public class DogDTO implements Serializable {
     private static final long serialVersionUID = -7861007524436742197L;
     private String breed;
     private List<String> subBreeds;
-    private List<Images> images;
+    private List<ImagesDTO> images;
 }

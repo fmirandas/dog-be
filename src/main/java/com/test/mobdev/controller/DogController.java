@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.mobdev.dto.DogDTO;
@@ -25,6 +26,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 @RestController
+@RequestMapping("/dog/")
 public class DogController {
 
     @Autowired
@@ -37,7 +39,7 @@ public class DogController {
      * @throws BusinessException custom exception
      */
     @ApiOperation(value = "Find information about a dog, by breed")
-    @GetMapping(path = "/dog/{breedName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{breedName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DogDTO> getProductList(@PathVariable(name = "breedName") String breedName)
             throws BusinessException {
 
@@ -49,7 +51,7 @@ public class DogController {
             return new ResponseEntity<>(dogInfo, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }
