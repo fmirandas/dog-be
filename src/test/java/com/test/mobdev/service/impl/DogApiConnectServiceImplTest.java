@@ -196,7 +196,7 @@ public class DogApiConnectServiceImplTest {
 
         when(restTemplate.exchange(uriComponents.toUri(), HttpMethod.GET, null, Object.class)).thenReturn(expected);
 
-        Object response = dogApiConnectService.getAllBreeds();
+        String response = dogApiConnectService.getAllBreeds();
 
         assertNotNull(response);
 

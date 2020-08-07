@@ -55,7 +55,7 @@ public class DogServiceImpl implements DogService {
 
         DogDTO dogInfo = new DogDTO();
         dogInfo.setBreed(breedName);
-        dogInfo.setSubBreeds(searchByListAll ? getSubBreedsByAll(breedName) : getSubBreeds(breedName));
+        dogInfo.setSubBreeds(searchByListAll ? getSubBreedsByAll(breedName) : getSubBreedsByBreedName(breedName));
         dogInfo.setImages(getImages(breedName));
 
         return dogInfo;
@@ -68,7 +68,7 @@ public class DogServiceImpl implements DogService {
      * @param breedName Dog Breed
      * @return List of Sub Breed
      */
-    private List<String> getSubBreeds(String breedName) {
+    private List<String> getSubBreedsByBreedName(String breedName) {
         ApiDogResponseDTO subBreeds = dogApiConnectService.getSubBreedByBreedName(breedName);
 
         return subBreeds.getMessage();
@@ -82,9 +82,7 @@ public class DogServiceImpl implements DogService {
      */
     private List<String> getSubBreedsByAll(String breedName) {
 
-        Object subBreedsresponse = dogApiConnectService.getAllBreeds();
-
-        String responseApi = subBreedsresponse.toString();
+        String responseApi = dogApiConnectService.getAllBreeds();
 
         if (responseApi.contains(breedName)) {
 
@@ -109,8 +107,8 @@ public class DogServiceImpl implements DogService {
     /**
      * Method that allows obtaining images of dogs
      * 
-     * @param breedName
-     * @return
+     * @param breedName Dog Breed
+     * @return imagesList
      */
     private List<ImagesDTO> getImages(String breedName) {
         ApiDogResponseDTO images = dogApiConnectService.getImagesByBreedName(breedName);

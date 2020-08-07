@@ -36,6 +36,6 @@ public interface DogApiConnectService {
      * @return Api response Object
      * @throws BusinessException custom exception
      */
-    Object getAllBreeds() throws BusinessException;
+    String getAllBreeds() throws BusinessException;
 
 }

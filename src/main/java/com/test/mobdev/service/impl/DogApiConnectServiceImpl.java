@@ -105,14 +105,14 @@ public class DogApiConnectServiceImpl implements DogApiConnectService {
      * @throws BusinessException custom exception
      */
     @Override
-    public Object getAllBreeds() throws BusinessException {
+    public String getAllBreeds() throws BusinessException {
 
         try {
             UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(url).path(list).build();
 
             ResponseEntity<Object> response = restTemplate.exchange(uriComponents.toUri(), HttpMethod.GET, null,
                     Object.class);
-            return response.getBody();
+            return response.getBody().toString();
         } catch (Exception restException) {
             log.error(restException);
             throw new BusinessException("Error List All Breeds");
