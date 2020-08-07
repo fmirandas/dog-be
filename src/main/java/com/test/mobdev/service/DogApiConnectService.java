@@ -11,7 +11,7 @@ import com.test.mobdev.exception.BusinessException;
 public interface DogApiConnectService {
 
     /**
-     * 
+     * Method that obtains the subBreed by Breed Name
      * @param breedName Dog Breed
      * @return Api response Object
      * @throws BusinessException custom exception
@@ -19,7 +19,7 @@ public interface DogApiConnectService {
     ApiDogResponseDTO getSubBreedByBreedName (String breedName) throws BusinessException;
     
     /**
-     * 
+     *  Method that obtains the images of dog
      * @param breedName Dog Breed
      * @return Api response Object
      * @throws BusinessException custom exception
@@ -27,6 +27,7 @@ public interface DogApiConnectService {
     ApiDogResponseDTO getImagesByBreedName (String breedName) throws BusinessException;
     
     /**
+     * Get All Breeds
      * @param breedName Dog Breed
      * @return Api response Object
      * @throws BusinessException custom exception

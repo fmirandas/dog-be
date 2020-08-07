@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.test.mobdev.dto.ApiDogResponseDTO;
@@ -43,6 +44,7 @@ public class DogServiceImpl implements DogService {
      * @throws BusinessException custom exception
      */
     @Override
+    @Cacheable("dogs")
     public DogDTO getDogInfo(String breedName) throws BusinessException {
 
         log.debug("Ingreso a para obtener la informacion del perro");

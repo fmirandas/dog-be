@@ -4,6 +4,12 @@ plugins {
 	id 'java'
 }
 
+ext {
+    junitVer = '4.12'
+    mockitoCoreVer = '2.21.0'
+    springVer = '5.1.2.RELEASE'
+}
+
 group = 'com.test'
 version = '1.0.0'
 sourceCompatibility = '1.8'
@@ -23,13 +29,21 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	
 	compile "io.springfox:springfox-swagger2:2.7.0"
 	compile "io.springfox:springfox-swagger-ui:2.7.0"	
     compile "io.springfox:springfox-swagger-common:2.7.0"
-
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+    testCompile "org.mockito:mockito-core:${mockitoCoreVer}"
+    testCompile "junit:junit:${junitVer}"
+    testCompile "org.springframework:spring-test:${springVer}"
+    testCompile "org.springframework.boot:spring-boot-test:2.3.2.RELEASE"
+    testCompile "org.mockito:mockito-junit-jupiter:2.23.0"
+	testCompile "org.junit.platform:junit-platform-runner:1.2.0"
 }
 
 test {

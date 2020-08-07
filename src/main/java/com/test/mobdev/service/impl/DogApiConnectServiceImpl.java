@@ -43,12 +43,13 @@ public class DogApiConnectServiceImpl implements DogApiConnectService{
     
     
     /**
-     * 
-     * @param breedName
-     * @return
+     * Method that obtains the subBreed by Breed Name
+     * @param breedName Dog Breed
+     * @return Api response Object
+     * @throws BusinessException custom exception
      */
     @Override
-    public ApiDogResponseDTO getSubBreedByBreedName (String breedName) {
+    public ApiDogResponseDTO getSubBreedByBreedName (String breedName) throws BusinessException{
         
         try {
             UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(url).path(subBreed).buildAndExpand(breedName);
@@ -69,12 +70,13 @@ public class DogApiConnectServiceImpl implements DogApiConnectService{
     
     
     /**
-     * 
-     * @param breedName
-     * @return
+     *  Method that obtains the images of dog
+     * @param breedName Dog Breed
+     * @return Api response Object
+     * @throws BusinessException custom exception
      */
     @Override
-    public ApiDogResponseDTO getImagesByBreedName (String breedName) {
+    public ApiDogResponseDTO getImagesByBreedName (String breedName) throws BusinessException{
         
         try {
             UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(url).path(images).buildAndExpand(breedName);
@@ -93,7 +95,12 @@ public class DogApiConnectServiceImpl implements DogApiConnectService{
         
     }
 
- 
+    /**
+     * Get All Breeds
+     * @param breedName Dog Breed
+     * @return Api response Object
+     * @throws BusinessException custom exception
+     */
     @Override
     public Object getAllBreeds() throws BusinessException {
 

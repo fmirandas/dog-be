@@ -70,8 +70,8 @@ public class Swagger {
         responsesDelete.add(code404);
         responsesDelete.add(code500);
 
-        ApiInfo apiInfo = new ApiInfoBuilder().title("Product test Api Documentation").version("1.0")
-                .description("Api Documentation For Product Test").termsOfServiceUrl("urn:tos").build();
+        ApiInfo apiInfo = new ApiInfoBuilder().title("Dog Backend Api Documentation").version("1.0")
+                .description("Api Documentation For Dog Backend Test").termsOfServiceUrl("urn:tos").build();
 
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo).select()
                 .apis(RequestHandlerSelectors.basePackage("com.test")).paths(PathSelectors.any()).build()
