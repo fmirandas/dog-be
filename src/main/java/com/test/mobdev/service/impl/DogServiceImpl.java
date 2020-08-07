@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,8 +19,6 @@ import com.test.mobdev.service.DogApiConnectService;
 import com.test.mobdev.service.DogService;
 import com.test.mobdev.utils.DogUtils;
 
-import lombok.extern.log4j.Log4j2;
-
 /**
  * Implementation of the Service that contains the logic to obtain the
  * information of the dog
@@ -26,10 +26,11 @@ import lombok.extern.log4j.Log4j2;
  * @author fmirands
  *
  */
-@Log4j2
 @Service
 public class DogServiceImpl implements DogService {
 
+    private static final Logger LOGGER = LogManager.getLogger(DogServiceImpl.class);
+    
     @Autowired
     DogApiConnectService dogApiConnectService;
 
@@ -47,7 +48,7 @@ public class DogServiceImpl implements DogService {
     @Cacheable("dogs")
     public DogDTO getDogInfo(String breedName) throws BusinessException {
 
-        log.debug("Ingreso a para obtener la informacion del perro");
+        LOGGER.info("Ingreso a para obtener la informacion del perro");
 
         if (!DogUtils.onlyLetters(breedName)) {
             throw new BusinessException("only letters is allowed");
@@ -69,6 +70,9 @@ public class DogServiceImpl implements DogService {
      * @return List of Sub Breed
      */
     private List<String> getSubBreedsByBreedName(String breedName) {
+        
+        LOGGER.info("Ingreso al metodo getSubBreedsByBreedName: "+breedName);
+        
         ApiDogResponseDTO subBreeds = dogApiConnectService.getSubBreedByBreedName(breedName);
 
         return subBreeds.getMessage();
@@ -81,6 +85,8 @@ public class DogServiceImpl implements DogService {
      * @return List of Sub Breed
      */
     private List<String> getSubBreedsByAll(String breedName) {
+        
+        LOGGER.info("Ingreso al metodo getSubBreedsByAll()");
 
         String responseApi = dogApiConnectService.getAllBreeds();
 
@@ -111,6 +117,9 @@ public class DogServiceImpl implements DogService {
      * @return imagesList
      */
     private List<ImagesDTO> getImages(String breedName) {
+        
+        LOGGER.info("Ingreso al metodo getImages: "+breedName);
+        
         ApiDogResponseDTO images = dogApiConnectService.getImagesByBreedName(breedName);
 
         List<ImagesDTO> imagesDog = images.getMessage().stream().map(url -> new ImagesDTO(url))

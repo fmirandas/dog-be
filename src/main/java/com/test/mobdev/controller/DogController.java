@@ -2,6 +2,8 @@ package com.test.mobdev.controller;
 
 import java.util.Objects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +18,6 @@ import com.test.mobdev.exception.BusinessException;
 import com.test.mobdev.service.DogService;
 
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.log4j.Log4j2;
 
 /**
  * Controller for Dog method
@@ -24,10 +25,11 @@ import lombok.extern.log4j.Log4j2;
  * @author fmirands
  *
  */
-@Log4j2
 @RestController
 @RequestMapping("/dog/")
 public class DogController {
+    
+    private static final Logger LOGGER = LogManager.getLogger(DogController.class);
 
     @Autowired
     DogService dogService;
@@ -44,7 +46,7 @@ public class DogController {
     public ResponseEntity<DogDTO> getProductList(@PathVariable(name = "breedName") String breedName)
             throws BusinessException {
 
-        log.debug("Ingreso para buscar la informacion del perro");
+        LOGGER.info("Ingreso para buscar la informacion del perro");
 
         DogDTO dogInfo = dogService.getDogInfo(breedName);
 
