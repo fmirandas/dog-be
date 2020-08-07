@@ -25,8 +25,8 @@ public final class DogUtils {
     }
 
     /**
-     * Method looking for race specific information Used when all races are
-     * obtained9
+     * Method looking for breed specific information. 
+     * Used when all breeds are obtained
      * 
      * @param responseApi
      * @param breedName
