@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+/**
+ * Class that stores the images of the Dog object
+ * @author fmirands
+ *
+ */
 @Data
 public class ImagesDTO implements Serializable{
 

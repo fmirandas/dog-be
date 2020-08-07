@@ -17,6 +17,11 @@ import com.test.mobdev.service.DogApiConnectService;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Implementation of the Service that connects to the dog API
+ * @author fmirands
+ *
+ */
 @Service
 @Log4j2
 public class DogApiConnectServiceImpl implements DogApiConnectService{
@@ -88,7 +93,7 @@ public class DogApiConnectServiceImpl implements DogApiConnectService{
         
     }
 
-    //TODO solucionar error
+ 
     @Override
     public Object getAllBreeds() throws BusinessException {
 
@@ -100,7 +105,7 @@ public class DogApiConnectServiceImpl implements DogApiConnectService{
             return response.getBody();
         }catch (Exception restException) {
             log.error(restException);
-            throw new BusinessException("Error All ");
+            throw new BusinessException("Error List All Breeds");
         }
 
     }

@@ -5,6 +5,11 @@ import java.util.List;
 
 import lombok.Data;
 
+/**
+ * Service response Class
+ * @author fmirands
+ *
+ */
 @Data
 public class DogDTO implements Serializable {
 

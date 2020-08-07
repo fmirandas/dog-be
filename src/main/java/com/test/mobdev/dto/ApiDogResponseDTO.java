@@ -5,6 +5,11 @@ import java.util.List;
 
 import lombok.Data;
 
+/**
+ * Api response Class
+ * @author fmirands
+ *
+ */
 @Data
 public class ApiDogResponseDTO implements Serializable{
  

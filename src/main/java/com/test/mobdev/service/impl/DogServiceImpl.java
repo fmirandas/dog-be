@@ -2,10 +2,10 @@ package com.test.mobdev.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.test.mobdev.dto.ApiDogResponseDTO;
@@ -18,6 +18,13 @@ import com.test.mobdev.utils.DogUtils;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Implementation of the Service that contains the logic to obtain the
+ * information of the dog
+ * 
+ * @author fmirands
+ *
+ */
 @Log4j2
 @Service
 public class DogServiceImpl implements DogService {
@@ -25,6 +32,16 @@ public class DogServiceImpl implements DogService {
     @Autowired
     DogApiConnectService dogApiConnectService;
 
+    @Value("${dog.sub-breed.byList}")
+    private boolean searchByListAll;
+
+    /**
+     * Method that allows to search the information of a dog
+     * 
+     * @param breedName Breed Name
+     * @return DogDTO Dog Information
+     * @throws BusinessException custom exception
+     */
     @Override
     public DogDTO getDogInfo(String breedName) throws BusinessException {
 
@@ -36,46 +53,63 @@ public class DogServiceImpl implements DogService {
 
         DogDTO dogInfo = new DogDTO();
         dogInfo.setBreed(breedName);
-        dogInfo.setSubBreeds(getSubBreedsByAll(breedName));
+        dogInfo.setSubBreeds(searchByListAll ? getSubBreedsByAll(breedName) : getSubBreeds(breedName));
         dogInfo.setImages(getImages(breedName));
 
         return dogInfo;
 
     }
 
+    /**
+     * Method that allows obtaining the sub breeds according to the breed of the dog
+     * 
+     * @param breedName Dog Breed
+     * @return List of Sub Breed
+     */
     private List<String> getSubBreeds(String breedName) {
         ApiDogResponseDTO subBreeds = dogApiConnectService.getSubBreedByBreedName(breedName);
 
         return subBreeds.getMessage();
     }
 
-    
+    /**
+     * Method that allows to search the sub Breeds, using the endpoint List All
+     * 
+     * @param breedName Dog Breed
+     * @return List of Sub Breed
+     */
     private List<String> getSubBreedsByAll(String breedName) {
-        
-        List<String> subBreedsList = new ArrayList<>();
-        
+
         Object subBreedsresponse = dogApiConnectService.getAllBreeds();
 
         String responseApi = subBreedsresponse.toString();
-            
-        if (responseApi.contains(breedName)) { 
-       
+
+        if (responseApi.contains(breedName)) {
+
+            List<String> subBreedsList = new ArrayList<>();
+
             String[] subBreedArray = DogUtils.getSubBreedArray(responseApi, breedName);
-            
-            for (String breeds:subBreedArray) {
+
+            for (String breeds : subBreedArray) {
                 if (!breeds.isEmpty()) {
                     subBreedsList.add(breeds.trim());
                 }
-               
+
             }
-            
+
             return subBreedsList;
-                  
+
         }
 
         return new ArrayList<>();
     }
 
+    /**
+     * Method that allows obtaining images of dogs
+     * 
+     * @param breedName
+     * @return
+     */
     private List<ImagesDTO> getImages(String breedName) {
         ApiDogResponseDTO images = dogApiConnectService.getImagesByBreedName(breedName);
 

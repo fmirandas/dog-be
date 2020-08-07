@@ -24,7 +24,8 @@ public final class DogUtils {
     }
     
     /**
-     * 
+     * Method looking for race specific information
+     * Used when all races are obtained9
      * @param responseApi
      * @param breedName
      * @return
@@ -37,13 +38,13 @@ public final class DogUtils {
         
         String[] firstSplitArray = responseApi.split(breedName);
         
-        String breadNameString = firstSplitArray[1];
+        String breadNameSplit = firstSplitArray[1];
         
-        String[] secondSplitArray = breadNameString.split(separatorBracketsOpen);
+        String[] secondSplitArray = breadNameSplit.split(separatorBracketsOpen);
         
-        String subBreedsListFinal = secondSplitArray[1];
+        String subBreedsListSplit = secondSplitArray[1];
        
-        String[] thirdSplitArray = subBreedsListFinal.split(separatorBracketClose);
+        String[] thirdSplitArray = subBreedsListSplit.split(separatorBracketClose);
         
        return thirdSplitArray[0].split(separatorComma);
         
