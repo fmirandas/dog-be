@@ -184,27 +184,24 @@ public class DogApiConnectServiceImplTest {
         });
 
     }
-    
-    
+
     @Test
     public void getAllBreeds_OK() {
 
         UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(url).path(list).build();
-        
+
         Object object = new Object();
 
         ResponseEntity<Object> expected = new ResponseEntity<>(object, HttpStatus.OK);
 
-        when(restTemplate.exchange(uriComponents.toUri(), HttpMethod.GET, null, Object.class))
-                .thenReturn(expected);
+        when(restTemplate.exchange(uriComponents.toUri(), HttpMethod.GET, null, Object.class)).thenReturn(expected);
 
         Object response = dogApiConnectService.getAllBreeds();
 
         assertNotNull(response);
 
     }
-    
-    
+
     @Test
     public void getAllBreeds_Exception() {
 
@@ -212,8 +209,7 @@ public class DogApiConnectServiceImplTest {
 
         HttpClientErrorException restException = new HttpClientErrorException(HttpStatus.NOT_FOUND);
 
-        when(restTemplate.exchange(uriComponents.toUri(), HttpMethod.GET, null, Object.class))
-                .thenThrow(restException);
+        when(restTemplate.exchange(uriComponents.toUri(), HttpMethod.GET, null, Object.class)).thenThrow(restException);
 
         BusinessException exception = assertThrows(BusinessException.class, () -> {
             dogApiConnectService.getAllBreeds();

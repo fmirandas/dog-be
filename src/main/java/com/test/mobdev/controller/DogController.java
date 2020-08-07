@@ -31,10 +31,10 @@ public class DogController {
 
     @Autowired
     DogService dogService;
-    
 
     /**
      * Method that allows obtaining information from a dog
+     * 
      * @param breedName Breed Name of dog
      * @return dogInfo Dog Information
      * @throws BusinessException custom exception

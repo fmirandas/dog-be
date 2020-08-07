@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Exception Class
+ * 
  * @author fmirands
  *
  */

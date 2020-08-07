@@ -7,6 +7,7 @@ import lombok.Data;
 
 /**
  * Service response Class
+ * 
  * @author fmirands
  *
  */
